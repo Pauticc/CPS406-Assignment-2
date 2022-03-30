@@ -1,2 +1,3 @@
-printf("hello")
-prinft("this is world")
+print("hello")
+print("this is world")
+print("696969")
