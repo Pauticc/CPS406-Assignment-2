@@ -6,6 +6,9 @@ class Club():
         self.discounts = [] #list of members with a discount
         self.payments = {} #number of practices paid and unpaid by members
         self.three_months = [] #list of members who have not skipped payments for 3 months
+        self.revenue = 0
+        self.cost = 0
+        self.profit = 0
 
     def add_member(self, name: str, number: str, paid: bool, address: str):
         """Create a dictionary with member names as keys to a list 
@@ -16,6 +19,18 @@ class Club():
         self.members.append(name)
         self.payments[name] = [0, 0]
 
+    def add_revenue(self, rev):
+        """Increments club finances as income"""
+        self.revenue += rev
+
+    def add_expense(self, exp):
+        """Decrements club finances as expenses"""
+        self.cost += exp
+    
+    def log_profit(self):
+        """Tracks club's profit"""
+        self.profit = self.revenue - self.cost
+    
     def add_attendance(self, member: str):
         """Incerement member's attendance by 1."""
         self.data[member][3] += 1
