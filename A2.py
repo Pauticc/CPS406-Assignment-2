@@ -1,7 +1,7 @@
 class Club():
     
     def __init__(self):
-        self.members = [] #list of all members of the club
+        self.members = [] #list of all usernames of members of the club
         self.data = {} #dictionary of info for each member
         self.discounts = [] #list of members with a discount
         self.payments = {} #number of practices paid and unpaid by members
@@ -10,14 +10,14 @@ class Club():
         self.cost = 0
         self.profit = 0
 
-    def add_member(self, name: str, number: str, paid: bool, address: str):
+    def add_member(self, username:str, password: str, name: str, number: str, paid: bool, address: str):
         """Create a dictionary with member names as keys to a list 
         containing their phone number, whether they paid for the current
         practice or not, their address, and attendance.
         """
-        self.data[name] = [number, paid, address, 0]
-        self.members.append(name)
-        self.payments[name] = [0, 0]
+        self.data[username] = [password, name, number, paid, address, 0]
+        self.members.append(username)
+        self.payments[username] = [0, 0]
 
     def add_revenue(self, rev):
         """Increments club finances as income"""
@@ -33,7 +33,7 @@ class Club():
     
     def add_attendance(self, member: str):
         """Incerement member's attendance by 1."""
-        self.data[member][3] += 1
+        self.data[member][5] += 1
 
     def sort_by_attendance(self):
         """Sort the list of members by attendance from highest to lowest."""
@@ -41,7 +41,7 @@ class Club():
             minimum = i
             for j in range( i + 1, len(self.members)):
                 lst = self.members
-                if(self.data[lst[j]][3] < self.data[lst[minimum]][3]):
+                if(self.data[lst[j]][5] < self.data[lst[minimum]][5]):
                     minimum = j
             if(minimum != i):
                 self.members[i], self.members[minimum] = self.members[minimum], self.members[i]
