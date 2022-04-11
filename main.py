@@ -2,7 +2,7 @@ import A2
 import pickle
 from os.path import exists
 
-login_options = ["L", "C", "Q"]
+login_options = ["L", "C", "Q","F"]
 select = False
 quit = False
 if not exists('member_data.pkl'):
@@ -18,7 +18,7 @@ def main():
     global quit
     while not quit:
         while not select:
-            choice = input("Enter: (L)ogin | (C)reate account | (Q)uit\n").upper()
+            choice = input("Enter: (L)ogin | (C)reate account | (Q)uit | (F)inances\n").upper()
             if choice in login_options:
                 select = True
             else:
@@ -38,6 +38,14 @@ def main():
                 else:
                     print("You have entered an invalid username or password")
             main_Menu(username)
+        elif choice == "F":
+            while True:
+                revenue = input("Enter credits: ")
+                expenses = input("Enter expenses: ")
+                club.add_revenue(float(revenue))
+                club.add_expense(float(expenses))
+                club.log_profit()
+                club.display_profit()
 
 def main_Menu(username):
     global club

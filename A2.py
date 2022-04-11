@@ -6,9 +6,9 @@ class Club():
         self.discounts = [] #list of members with a discount
         self.payments = {} #number of practices paid and unpaid by members
         self.three_months = [] #list of members who have not skipped payments for 3 months
-        self.revenue = 0
-        self.cost = 0
-        self.profit = 0
+        self.revenue = 0.0
+        self.cost = 0.0
+        self.profit = 0.0
 
     def add_member(self, username:str, password: str, name: str, number: str, paid: bool, address: str):
         """Create a dictionary with member names as keys to a list 
@@ -30,6 +30,10 @@ class Club():
     def log_profit(self):
         """Tracks club's profit"""
         self.profit = self.revenue - self.cost
+    
+    def display_profit(self):
+        """Displays current club account-balance"""
+        print("Account Balance: $", self.profit,"CAD", sep = '')
     
     def add_attendance(self, member: str):
         """Incerement member's attendance by 1."""
