@@ -37,6 +37,7 @@ class Club():
     
     def remove_member(self, username:str):
         del self.data[username]
+        self.members.remove(username)
 
     def add_revenue(self, rev):
         """Increments club finances as income"""
