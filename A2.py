@@ -3,7 +3,7 @@ class Club():
     def __init__(self):
         self.members = [] #list of all usernames of members of the club
         self.coaches = [] #list of all usernames of coaches of the club
-        self.data = {} #dictionary of info for each member
+        self.data = {} #dictionary of info for each member/coach/treasuer
         self.discounts = [] #list of members with a discount
         self.payments = {} #number of practices paid and unpaid by members
         self.three_months = [] #list of members who have not skipped payments for 3 months
@@ -16,7 +16,7 @@ class Club():
         containing their phone number, whether they paid for the current
         practice or not, their address, and attendance.
         """
-        self.data[username] = [password, name, number, paid, address, 0]
+        self.data[username] = [password, name, number, paid, address, 0, "M"]
         self.members.append(username)
         self.payments[username] = [0, 0]
     
@@ -24,8 +24,16 @@ class Club():
         """Create a dictionary with coach names as keys to a list 
         containing their phone number and attendance.
         """
-        self.data[username] = [password, name, number, address, 0]
+        self.data[username] = [password, name, number, False, address, 0, "C"]
         self.coaches.append(username)
+    
+    def remove_coach(self, username):
+        del self.data[username]
+        self.coaches.remove(username)
+
+    def add_Treasuer(self, username:str, password: str, name: str, number: str, address: str):
+        self.data[username] = [password, name, number, False, address, 0 ,"T"]
+
     
     def remove_member(self, username:str):
         del self.data[username]
