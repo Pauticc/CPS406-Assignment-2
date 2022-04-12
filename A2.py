@@ -2,6 +2,7 @@ class Club():
     
     def __init__(self):
         self.members = [] #list of all usernames of members of the club
+        self.coaches = [] #list of all usernames of coaches of the club
         self.data = {} #dictionary of info for each member
         self.discounts = [] #list of members with a discount
         self.payments = {} #number of practices paid and unpaid by members
@@ -18,6 +19,16 @@ class Club():
         self.data[username] = [password, name, number, paid, address, 0]
         self.members.append(username)
         self.payments[username] = [0, 0]
+    
+    def add_coach(self, username:str, password: str, name: str, number: str, address: str):
+        """Create a dictionary with coach names as keys to a list 
+        containing their phone number and attendance.
+        """
+        self.data[username] = [password, name, number, address, 0]
+        self.coaches.append(username)
+    
+    def remove_member(self, username:str):
+        del self.data[username]
 
     def add_revenue(self, rev):
         """Increments club finances as income"""
