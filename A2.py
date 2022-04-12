@@ -55,6 +55,10 @@ class Club():
         """Displays current club account-balance"""
         print("Account Balance: $", self.profit,"CAD", sep = '')
     
+    def reminder(self):
+        """Displays a reminder/announcemnet"""
+        
+    
     def add_attendance(self, member: str):
         """Incerement member's attendance by 1."""
         self.data[member][5] += 1

@@ -93,8 +93,8 @@ def main_Menu_Coach(username):
                 print("List of Members: ")
                 print(club.members)
                 while True:
-                    M_management = input("Enter: (R)emove Member | (Q)uit\n").upper()
-                    if M_management in ["R", "Q"]:
+                    M_management = input("Enter: (A)dd Member | (R)emove Member | (Q)uit\n").upper()
+                    if M_management in ["A","R", "Q"]:
                         break
                     else:
                         print("Invalid input")
@@ -107,6 +107,21 @@ def main_Menu_Coach(username):
                             break
                         else:
                             print("Invalid Input")
+                if M_management == "A":
+                    while True:
+                        username = input("Enter a username: ")
+                        if username in club.data:
+                            print("Username already taken")
+                        else:
+                            password = input("Enter a password: ")
+                            name = input("Enter your name: ")
+                            number = input("Enter your number: ")
+                            address = input("Enter your address: ")
+                        club.add_member(username, password, name, number, False, address)
+                        print("Successfully added")
+                        break
+                else:
+                    print("Invalid Input")
     reset_select()
 
 def main_Menu_Treasurer(username):
