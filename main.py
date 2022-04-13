@@ -3,7 +3,7 @@ import pickle
 from os.path import exists
 
 login_options = ["L", "C", "Q"]
-treasurer_menu = ["F", "C", "Q", "S"]
+treasurer_menu = ["F", "C", "Q", "S", "A"]
 coach_menu = ["M", "Q"]
 member_menu = ["P", "Q"]
 treasurer_string = "abcdefg"
@@ -71,7 +71,10 @@ def main_Menu_Member(username):
             break
         else:
             if choice == "P":
-                print("Some Pay code")
+                credit = input("Enter amount to be paid: $")
+                club.add_payment(username, True)
+                club.add_revenue(float(credit))
+                print("Payment Successful")
         
     reset_select()
 def main_Menu_Coach(username):
@@ -130,11 +133,10 @@ def main_Menu_Treasurer(username):
     while not quit:
         print("------------------Treasurer Account------------------")
         print("Username:", username, "Name:", club.data[username][1])
-        print("Revenue: $", club.revenue, "Cost: $", club.cost, "Profit: $", club.profit)
-        print("Current month's account payables: ")
-        print("Log of Unpaid Debt from Previous Months: ")
+        print("Revenue: (+)$", club.revenue, "Payables: (-)$", club.cost, "Profit: $", club.profit)
+        print("Current month's account payables: $",club.cost,sep = '')
         while True:
-            choice = input("Enter: (F)inances | (C)oach Management | (S)chedule | (Q)uit\n").upper()
+            choice = input("Enter: (F)inances | (C)oach Management | (S)chedule | (A)rrange | (Q)uit\n").upper()
             if choice in treasurer_menu:
                 break
             else:
@@ -144,7 +146,7 @@ def main_Menu_Treasurer(username):
         else:
             if choice == "F":
                 revenue = input("Enter credits: $")
-                expenses = input("Enter expenses: $")
+                expenses = input("Enter payables: $")
                 club.add_revenue(float(revenue))
                 club.add_expense(float(expenses))
                 club.log_profit()
@@ -169,6 +171,20 @@ def main_Menu_Treasurer(username):
                             print("Invalid Input")
             elif choice == "S":
                 print("Some Schedule Code")
+            elif choice == "A":
+                sort_choice = input("Enter: Sort By (A)ttendance | Sort By (P)ayment | (Q)uit \n").upper()
+                if sort_choice in ["A","P"]:
+                    while True:
+                        if sort_choice == "A":
+                            club.sort_by_attendance()
+                            print(club.members,"\n")
+                            break
+                        elif sort_choice == "P":
+                            club.sort_by_payments()
+                            print(club.members,"\n")
+                            break
+                        else:
+                            print("Invalid Input\n")
     save_object()
     reset_select()
 
