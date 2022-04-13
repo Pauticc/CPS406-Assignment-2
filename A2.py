@@ -16,7 +16,7 @@ class Club():
         containing their phone number, whether they paid for the current
         practice or not, their address, and attendance.
         """
-        self.data[username] = [password, name, number, paid, address, 0, "M"]
+        self.data[username] = [password, name, number, paid, address, 0, "M","announcement"]
         self.members.append(username)
         self.payments[username] = [0, 0]
     
@@ -55,9 +55,14 @@ class Club():
         """Displays current club account-balance"""
         print("Account Balance: $", self.profit,"CAD", sep = '')
     
-    def reminder(self):
-        """Displays a reminder/announcemnet"""
-        
+    def reminder(self,username,reminder):
+        """Displays a reminder/announcemnet to a member"""
+        self.data[username][7] = reminder
+
+    def reminder_all(self,reminder):
+        """Displays a reminder/announcemnet to every member"""
+        for i in self.members:
+            self.data[i][7] = reminder
     
     def add_attendance(self, member: str):
         """Incerement member's attendance by 1."""

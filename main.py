@@ -59,6 +59,7 @@ def main_Menu_Member(username):
     global club
     while True:
         print("------------------Member Account------------------")
+        print("ANNOUNCEMENT: ",club.data[username][7])
         print("Username: ", username, "Name: ", club.data[username][1], "Phone Number: ", club.data[username][2], "Address: ", club.data[username][4])
         print("Paid: ", club.data[username][3],)
         while True:
@@ -97,8 +98,8 @@ def main_Menu_Coach(username):
                 print("List of Members: ")
                 print(club.members)
                 while True:
-                    M_management = input("Enter: (A)dd Member | (R)emove Member | (Q)uit\n").upper()
-                    if M_management in ["A","R", "Q"]:
+                    M_management = input("Enter: (A)dd Member | (R)emove Member | (C)ommunication | (Q)uit\n").upper()
+                    if M_management in ["A","R", "C", "Q"]:
                         break
                     else:
                         print("Invalid input")
@@ -111,6 +112,27 @@ def main_Menu_Coach(username):
                             break
                         else:
                             print("Invalid Input")
+                if M_management == "C":
+                    c_choice = input("Enter: (I)ndividual Message | (M)essage All | (Q)uit\n").upper()
+                    if c_choice == "I":
+                        while True:
+                            member_R = input("Enter the Username of the Member to Message: ")
+                            reminder = input("Enter message: ")
+                            if member_R in club.members:
+                                club.reminder(member_R,reminder)
+                                print("Message Sent to ", member_R)
+                                break
+                            else:
+                                print("Invalid Username or Input")
+                    if c_choice == "M":
+                        while True:
+                            reminder = input("Enter message: ")
+                            if reminder != "":
+                                club.reminder_all(reminder)
+                                print("Message Sent to all members")
+                                break
+                            else:
+                                print("Invalid Input")
                 if M_management == "A":
                     while True:
                         username = input("Enter a username: ")
