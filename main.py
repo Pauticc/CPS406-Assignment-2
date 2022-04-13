@@ -74,6 +74,7 @@ def main_Menu_Member(username):
                 credit = input("Enter amount to be paid: $")
                 club.add_payment(username, True)
                 club.add_revenue(float(credit))
+                club.log_profit()
                 print("Payment Successful")
         
     reset_select()
