@@ -120,7 +120,7 @@ def main_Menu_Coach(username):
                             reminder = input("Enter message: ")
                             if member_R in club.members:
                                 club.reminder(member_R,reminder)
-                                print("Message Sent to ", member_R)
+                                print("Message Sent to", member_R)
                                 break
                             else:
                                 print("Invalid Username or Input")
@@ -146,8 +146,7 @@ def main_Menu_Coach(username):
                         club.add_member(username, password, name, number, False, address)
                         print("Successfully added")
                         break
-                else:
-                    print("Invalid Input")
+                
     reset_select()
 
 def main_Menu_Treasurer(username):
