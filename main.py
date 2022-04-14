@@ -128,6 +128,7 @@ def main_Menu_Coach(username):
                     if c_choice == "I":
                         while True:
                             member_R = input("Enter the Username of the Member to Message: ")
+                            print("Username: ", member_R, "Name: ", club.data[member_R][1], "Paid: ", club.data[member_R][3], "Attendance: ", club.data[member_R][5],"\n")
                             reminder = input("Enter message: ")
                             if member_R in club.members:
                                 club.reminder(member_R,reminder)
