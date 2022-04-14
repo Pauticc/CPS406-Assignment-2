@@ -5,7 +5,7 @@ from os.path import exists
 login_options = ["L", "C", "Q"]
 treasurer_menu = ["F", "C", "Q", "S", "A"]
 coach_menu = ["M", "Q"]
-member_menu = ["P", "Q"]
+member_menu = ["P", "A","Q"]
 treasurer_string = "abcdefg"
 coach_string = "123456"
 choice = "none"
@@ -61,9 +61,10 @@ def main_Menu_Member(username):
         print("------------------Member Account------------------")
         print("ANNOUNCEMENT: ",club.data[username][7])
         print("Username: ", username, "Name: ", club.data[username][1], "Phone Number: ", club.data[username][2], "Address: ", club.data[username][4])
-        print("Paid: ", club.data[username][3],)
+        print("Paid: ", club.data[username][3])
+        print("Attendance: ", club.data[username][5])
         while True:
-            choice = input("Enter: (P)ayment | (Q)uit\n").upper()
+            choice = input("Enter: (P)ayment | (A)ttendance | (Q)uit\n").upper()
             if choice in member_menu:
                 break
             else:
@@ -77,6 +78,16 @@ def main_Menu_Member(username):
                 club.add_revenue(float(credit))
                 club.log_profit()
                 print("Payment Successful")
+                club.data[username][3] = True
+            elif choice == "A":
+                option = input("Enter: y/Y to log attendance: ").upper()
+                if option == "Y":
+                    club.add_attendance(username)
+                    print("Successfully logged attendance for the session")
+                    break
+                else:
+                    print("Invalid Input")
+
         
     reset_select()
 def main_Menu_Coach(username):
@@ -199,11 +210,11 @@ def main_Menu_Treasurer(username):
                     while True:
                         if sort_choice == "A":
                             club.sort_by_attendance()
-                            print(club.members,"\n")
+                            print("Members with highest attendance sorted and listed first: ", club.members,"\n")
                             break
                         elif sort_choice == "P":
-                            club.sort_by_payments()
-                            print(club.members,"\n")
+                            club.sort_by_payments(False)
+                            print("Members with unpaid fee sorted and listed first: ", club.members,"\n")
                             break
                         else:
                             print("Invalid Input\n")
