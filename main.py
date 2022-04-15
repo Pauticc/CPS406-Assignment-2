@@ -124,7 +124,7 @@ def main_Menu_Coach(username):
                         else:
                             print("Invalid Input")
                 if M_management == "C":
-                    c_choice = input("Enter: (I)ndividual Message | (M)essage All | (Q)uit\n").upper()
+                    c_choice = input("Enter: (I)ndividual Message | (M)essage All | |(O)ffer discount | (Q)uit\n").upper()
                     if c_choice == "I":
                         while True:
                             member_R = input("Enter the Username of the Member to Message: ")
@@ -145,6 +145,13 @@ def main_Menu_Coach(username):
                                 break
                             else:
                                 print("Invalid Input")
+                    if c_choice == "O":
+                        club.add_discount_v1()
+                        club.add_discount_v2()
+                        for member in club.discounts:
+                            club.reminder(member,"You earned a 10 percent discount!")
+                            print("Message Sent to", member)
+                        club.discounts = []
                 if M_management == "A":
                     while True:
                         username = input("Enter a username: ")
