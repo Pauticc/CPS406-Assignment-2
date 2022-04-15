@@ -78,7 +78,6 @@ class Club():
                     minimum = j
             if(minimum != i):
                 self.members[i], self.members[minimum] = self.members[minimum], self.members[i]
-        self.members.reverse()
     
     def add_discount_v1(self, member: str):
         """Add top 10 members based on attendance to 10% discount list."""
@@ -106,7 +105,6 @@ class Club():
                         minimum = j
                 if(minimum != i):
                     self.members[i], self.members[minimum] = self.members[minimum], self.members[i]
-            self.members.reverse()
         else:
             for i in range(len(self.members) - 1):
                 minimum = i
@@ -116,8 +114,7 @@ class Club():
                         minimum = j
                 if(minimum != i):
                     self.members[i], self.members[minimum] = self.members[minimum], self.members[i]
-            self.members.reverse()
-            
+
     def warning(self):
         """Return a list of members who missed at least one payment."""
         lst = []

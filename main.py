@@ -164,14 +164,15 @@ def main_Menu_Coach(username):
 def main_Menu_Treasurer(username):
     global club
     quit = False
-    unpaid_lst = []
+    
     while not quit:
         print("------------------Treasurer Account------------------")
         print("Username:", username, "Name:", club.data[username][1])
         print("Revenue: (+)$", club.revenue, "Payables: (-)$", club.cost, "Profit: $", club.profit)
         print("Current month's account payables: $",club.cost,sep = '')
+        unpaid_lst = []
         for member in club.data:
-            if club.data[member][3] == False and club.data[member][6] == "M":
+            if club.data[member][3] == False and club.data[member][6] == "M" :
                 unpaid_lst.append(club.data[member][0])
         print("List of all the members with unpaid fee/club debt: ", unpaid_lst)
         while True:
@@ -219,7 +220,7 @@ def main_Menu_Treasurer(username):
                             print("Members with highest attendance sorted and listed first: ", club.members,"\n")
                             break
                         elif sort_choice == "P":
-                            club.sort_by_payments(False)
+                            club.sort_by_payments(True)
                             print("Members with unpaid fee sorted and listed first: ", club.members,"\n")
                             break
                         else:
