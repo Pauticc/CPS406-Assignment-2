@@ -11,7 +11,7 @@ class Club():
         self.cost = 0.0
         self.profit = 0.0
 
-    def add_member(self, username: str, password: str, name: str, number: str, paid: bool, address: str):
+    def add_member(self, username:str, password: str, name: str, number: str, paid: bool, address: str):
         """Create a dictionary with member names as keys to a list 
         containing their phone number, whether they paid for the current
         practice or not, their address, and attendance.
@@ -82,8 +82,12 @@ class Club():
     def add_discount_v1(self):
         """Add top 10 members based on attendance to 10% discount list."""
         self.sort_by_attendance()
-        for i in range(10):
-            self.discounts.append(self.members[i])
+        if (len(self.members) >= 10):
+            for i in range(10):
+                self.discounts.append(self.members[i])
+        else:
+            for i in range(len(self.members)):
+                self.discounts.append(self.members[i])
 
     def add_payment(self, member: str, paid: bool):
         """Increment the members amount of paid or unpaid practices depending on
