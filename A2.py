@@ -136,5 +136,3 @@ class Club():
         for member in self.members:
             if member in self.three_months:
                 self.discounts.append(member)
-
-    
