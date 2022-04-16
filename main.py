@@ -74,7 +74,10 @@ def main_Menu_Member(username):
         else:
             if choice == "P":
                 credit = input("Enter amount to be paid: $")
-                club.add_payment(username, True)
+                if float(credit) != 0:
+                    club.add_payment(username, True)
+                else:
+                    club.add_payment(username, False)
                 club.add_revenue(float(credit))
                 club.log_profit()
                 print("Payment Successful")
@@ -124,7 +127,7 @@ def main_Menu_Coach(username):
                         else:
                             print("Invalid Input")
                 if M_management == "C":
-                    c_choice = input("Enter: (I)ndividual Message | (M)essage All | (Q)uit\n").upper()
+                    c_choice = input("Enter: (I)ndividual Message | (M)essage All | |(O)ffer discount | |(W)arn members | (Q)uit\n").upper()
                     if c_choice == "I":
                         while True:
                             member_R = input("Enter the Username of the Member to Message: ")
@@ -145,6 +148,18 @@ def main_Menu_Coach(username):
                                 break
                             else:
                                 print("Invalid Input")
+                    if c_choice == "O":
+                        club.add_discount_v1()
+                        club.add_discount_v2()
+                        for member in club.discounts:
+                            club.reminder(member,"You earned a 10 percent discount!")
+                            print("Message Sent to", member)
+                        club.discounts = []
+                    if c_choice == "W":
+                        for member in club.members:
+                            if club.payments[member][1] > 0:
+                                club.reminder(member,"You missed your payment!")
+                                print("Message Sent to", member)
                 if M_management == "A":
                     while True:
                         username = input("Enter a username: ")
@@ -164,14 +179,15 @@ def main_Menu_Coach(username):
 def main_Menu_Treasurer(username):
     global club
     quit = False
-    unpaid_lst = []
+    
     while not quit:
         print("------------------Treasurer Account------------------")
         print("Username:", username, "Name:", club.data[username][1])
         print("Revenue: (+)$", club.revenue, "Payables: (-)$", club.cost, "Profit: $", club.profit)
-        print("Current month's account payables: $",club.cost,sep = '')
+        print("Current month's account payables: $",club.cost)
+        unpaid_lst = []
         for member in club.data:
-            if club.data[member][3] == False and club.data[member][6] == "M":
+            if club.data[member][3] == False and club.data[member][6] == "M" :
                 unpaid_lst.append(club.data[member][0])
         print("List of all the members with unpaid fee/club debt: ", unpaid_lst)
         while True:
@@ -219,7 +235,7 @@ def main_Menu_Treasurer(username):
                             print("Members with highest attendance sorted and listed first: ", club.members,"\n")
                             break
                         elif sort_choice == "P":
-                            club.sort_by_payments(False)
+                            club.sort_by_payments(True)
                             print("Members with unpaid fee sorted and listed first: ", club.members,"\n")
                             break
                         else:
@@ -294,3 +310,4 @@ def account_creation():
 
 if __name__ == "__main__":
     main()
+    
